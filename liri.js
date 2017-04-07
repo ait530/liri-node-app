@@ -1,14 +1,18 @@
-// At the top of the liri.js file, write the code you need to grab the data from keys.js. Then store the keys in a variable.
-
 // require - provides a way to load a module (keys.js), needs "./" since keys.js is in the same directory as liri.js 
+// accesses all of the exports in the key.js file. This can be confirmed when "node liri.js" is run in the command line since the console.log from the keys.js file will output 'this is loaded.'
 var keys = require('./keys.js');
 
-
+// process.argv will print out any command line arguments
 var input = process.argv;
+// outputs the command line arguments
 console.log(input);
 
-
+// Loads Twitter module
 var Twitter = require('twitter');
+// Loads Spotify module
+var spotify = require('spotify');
+
+
 
 //1. You will need to send requests to the Twitter, Spotify and IMDB APIs.
 // Twitter https://www.npmjs.com/package/twitter
@@ -16,37 +20,45 @@ var Twitter = require('twitter');
 // Request https://www.npmjs.com/package/request (grab data from OMDB API)
 
 
-///////////////////////////////////////////////////////////////////
-// Twitter REQUEST/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+// TWITTER REQUEST///////////////////////////////////////////////////////
 
 // New client, pulls from keys(exports).twitter keys object
+// Shorten to keys.twitterKeys since "keys" pulls from keys.js, and "twitterKeys" are in the keys.js file, thus, keys.twitterKeys to access Twitter API. 
 var client = new Twitter(keys.twitterKeys);
  
 // Grabs from my twitter profile "atrierweil".
 var params = {screen_name: 'atrierweil'};
 // Gets status, function that outputs error, tweets, and response.
 client.get('statuses/user_timeline', params, function(error, tweets, response) {
-  // If no error, log tweets.
-  if (!error) {  
-    console.log(tweets);
+  // If no error, 
+  if (!error) { 
+    // log tweets. 
+    console.log(tweets)
   }
 });
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+// Need to figure out some way to provide "node liri.js my-tweets" command.
+// Shows last 20 tweets when they were created in terminal (want to output the text portion of the tweets output)
+
+
+
 
 
 ///////////////////////////////////////////////////////////////////
 // SPOTIFY REQUEST
-// var spotify = require('spotify');
+
+spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(err, data) {
+    if ( err ) {
+        console.log('Error occurred: ' + err);
+        return;
+    }
+    data.tracks.href
  
-// spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(err, data) {
-//     if ( err ) {
-//         console.log('Error occurred: ' + err);
-//         return;
-//     }
-//     data.tracks.href
- 
-//     // Do something with 'data' 
-// });
+    // Do something with 'data' 
+    
+});
 ///////////////////////////////////////////////////////////////////
 
 
