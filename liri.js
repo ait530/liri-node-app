@@ -57,9 +57,29 @@ spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(er
     data.tracks.href
  
     // Do something with 'data' 
-    
+
 });
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+
+// Giphy URL + string from array + the api key
+    var queryURL = "https://api.spotify.com/v1/artists/{id}/top-tracks";
+
+// spotify developer
+// Client ID
+// var client_id = "e25f7a6dfece48839bff27e5dac13849";
+
+
+// Client Secret
+// var client_secret = "fe74b2d270684b84a298f724fac8f68e";
+
+
+
+  // Creating an AJAX (asynchronous HTTP request) calls the spotify API for the song name.
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).done(function(response) {}
 
 
 
