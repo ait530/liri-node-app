@@ -1,22 +1,75 @@
 // At the top of the liri.js file, write the code you need to grab the data from keys.js. Then store the keys in a variable.
-var keys = require('keys.js');
+
+// require - provides a way to load a module (keys.js), needs "./" since keys.js is in the same directory as liri.js 
+var keys = require('./keys.js');
+
+
+var input = process.argv;
+console.log(input);
 
 
 var Twitter = require('twitter');
-var spotify = require('spotify');
-var request = require('request');
-
-
-// Might need to use
-// var Twit = require('twit')
-
 
 //1. You will need to send requests to the Twitter, Spotify and IMDB APIs.
 // Twitter https://www.npmjs.com/package/twitter
 // Spotify https://www.npmjs.com/package/spotify
 // Request https://www.npmjs.com/package/request (grab data from OMDB API)
 
-var queryURL = 
+
+///////////////////////////////////////////////////////////////////
+// Twitter REQUEST/////////////////////////////////////////////////////
+
+// New client, pulls from keys(exports).twitter keys object
+var client = new Twitter(keys.twitterKeys);
+ 
+// Grabs from my twitter profile "atrierweil".
+var params = {screen_name: 'atrierweil'};
+// Gets status, function that outputs error, tweets, and response.
+client.get('statuses/user_timeline', params, function(error, tweets, response) {
+  // If no error, log tweets.
+  if (!error) {  
+    console.log(tweets);
+  }
+});
+///////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////
+// SPOTIFY REQUEST
+// var spotify = require('spotify');
+ 
+// spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(err, data) {
+//     if ( err ) {
+//         console.log('Error occurred: ' + err);
+//         return;
+//     }
+//     data.tracks.href
+ 
+//     // Do something with 'data' 
+// });
+///////////////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////////////////////
+// OMDB REQUEST
+// Basic Node application for requesting data from the OMDB website
+// Here we incorporate the "request" npm package
+// var request = require("request");
+
+// // We then run the request module on a URL with a JSON
+// request("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&r=json", function(error, response, body) {
+
+//   // If there were no errors and the response code was 200 (i.e. the request was successful)...
+//   if (!error && response.statusCode === 200) {
+
+//     // Then we print out the imdbRating
+//     console.log("The movie's rating is: " + JSON.parse(body).imdbRating);
+//   }
+// });
+///////////////////////////////////////////////////////////////////
+
+
 
 
 

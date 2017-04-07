@@ -1,5 +1,6 @@
 console.log('this is loaded');
 
+// export -- an object which is shared between all instances of the current module and made accesibl through require().
 exports.twitterKeys = {
   consumer_key: 'IwhhnyzWiCwg1jZUTKq2ccWUH',
   consumer_secret: 'eiSCTB6TLuRMRrUMMYhcjaslwDwmNi0QCBAygi3Bu3wV8C18Ne',
