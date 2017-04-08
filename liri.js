@@ -1,31 +1,31 @@
-// require - provides a way to load a module (keys.js), needs "./" since keys.js is in the same directory as liri.js 
+/////////////////////////////////////////////////////////////////// // Keys & NPM requires
+////////////////////////////////////////////////////////////////////
+// require - provides a way to load a module (keys.js), needs "./" since keys.js is in the same (current) directory as liri.js 
 // accesses all of the exports in the key.js file. This can be confirmed when "node liri.js" is run in the command line since the console.log from the keys.js file will output 'this is loaded.'
 var keys = require('./keys.js');
 
 // process.argv will print out any command line arguments
-var input = process.argv;
+var nodeArgs = process.argv;
 // outputs the command line arguments
 console.log(input);
 
+
+
+
+
+xs
 // Loads Twitter module
-var Twitter = require('twitter');
+var twitter = require('twitter');
 // Loads Spotify module
 var spotify = require('spotify');
 
 
 
-//1. You will need to send requests to the Twitter, Spotify and IMDB APIs.
-// Twitter https://www.npmjs.com/package/twitter
-// Spotify https://www.npmjs.com/package/spotify
-// Request https://www.npmjs.com/package/request (grab data from OMDB API)
-
-
-/////////////////////////////////////////////////////////////////////////
-// TWITTER REQUEST///////////////////////////////////////////////////////
-
+/////////////////////////////////////////////////////////////////////TWITTER REQUEST
+////////////////////////////////////////////////////////////////////
 // New client, pulls from keys(exports).twitter keys object
 // Shorten to keys.twitterKeys since "keys" pulls from keys.js, and "twitterKeys" are in the keys.js file, thus, keys.twitterKeys to access Twitter API. 
-var client = new Twitter(keys.twitterKeys);
+var client = new twitter(keys.twitterKeys);
  
 // Grabs from my twitter profile "atrierweil".
 var params = {screen_name: 'atrierweil'};
@@ -37,7 +37,7 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
     console.log(tweets)
   }
 });
-/////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Need to figure out some way to provide "node liri.js my-tweets" command.
 // Shows last 20 tweets when they were created in terminal (want to output the text portion of the tweets output)
@@ -46,24 +46,25 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
 
 
 
+////////////////////////////////////////////////////////////////////
+//SPOTIFY REQUEST
 ///////////////////////////////////////////////////////////////////
-// SPOTIFY REQUEST
-
-spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(err, data) {
-    if ( err ) {
-        console.log('Error occurred: ' + err);
-        return;
-    }
-    data.tracks.href
+// spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(err, data) {
+//     if ( err ) {
+//         console.log('Error occurred: ' + err);
+//         return;
+//     }
+//     data.tracks.href
  
-    // Do something with 'data' 
+//     // Do something with 'data' 
 
-});
+// });
 /////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
 
 // Giphy URL + string from array + the api key
-    var queryURL = "https://api.spotify.com/v1/artists/{id}/top-tracks";
+  // var queryURL = "https://api.spotify.com/v1/artists/{id}/top-tracks";
 
 // spotify developer
 // Client ID
@@ -76,15 +77,17 @@ spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(er
 
 
   // Creating an AJAX (asynchronous HTTP request) calls the spotify API for the song name.
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).done(function(response) {}
+  // $.ajax({
+  //   url: queryURL,
+  //   method: "GET"
+  // }).done(function(response) {}
+
 
 
 
 ///////////////////////////////////////////////////////////////////
 // OMDB REQUEST
+///////////////////////////////////////////////////////////////////
 // Basic Node application for requesting data from the OMDB website
 // Here we incorporate the "request" npm package
 // var request = require("request");
@@ -100,20 +103,45 @@ spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(er
 //   }
 // });
 ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////////////////////////////////
+//READING .TEXTFILE
+////////////////////////////////////////////////////////////////////
+// fs is an NPM package for reading and writing files
+// var fs = require("fs");
+
+// var textFile = process.argv[2];
+
+// // This block of code will read from the "movies.txt" file.
+// // It's important to include the "utf8" parameter or the code will provide stream data (garbage)
+// // The code will store the contents of the reading inside the variable "data"
+// fs.readFile("movies.txt", "utf8", function(error, data) {
+
+//   // We will then print the contents of data
+//   console.log(data);
+
+//   // Then split it by commas (to make it more readable)
+//   var dataArr = data.split(",");
+
+//   // We will then re-display the content as an array for later use.
+//   console.log(dataArr);
+
+// });
+///////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 
 
 
 
 
 
-
-
-// Make it so liri.js can take in one of the following commands:
-// my-tweets
-// spotify-this-song
-// movie-this
-// do-what-it-says
-
+////////////////////////////////////////////////////////////////////
+//Notes
+////////////////////////////////////////////////////////////////////
 // e.g.) commandline 
 // input: node liri.js my-tweets  
 // output: shows your last 20 tweets and when they were created at in your terminal/bash window.
@@ -154,3 +182,13 @@ spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(er
 // It should run spotify-this-song for "I Want it That Way," as follows the text in random.txt.
 // Feel free to change the text in that document to test out the feature for other commands.
 
+
+
+
+
+
+
+// Might be useful...
+// parsefloat() for decimal numbers
+// 'npm init' for package.json files 
+// 'npm install *whatever* --save'
