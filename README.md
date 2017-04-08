@@ -16,6 +16,7 @@ Twitter: displays my latest tweets.
 
 
 Spotify: displays song's artist(s), song name, preview link of the song, and album that the song is from. 
+Command: "node liri.js spotify-this-song"
            * Artist(s)
            * The song's name
            * A preview link of the song from Spotify

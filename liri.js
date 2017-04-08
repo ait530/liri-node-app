@@ -25,11 +25,11 @@ var request = require('request');
 
 
 
-/////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 // TWITTER REQUEST
 /////////////////////////////////////////////////////////////////////////////
 // if the 2nd argument is 'my-tweets'...
-if (process.argv[2] = 'my-tweets') {
+if (process.argv[2] === 'my-tweets') {
   // evoke twitter request function
   twitterRequest(); 
   function twitterRequest() {
@@ -51,7 +51,7 @@ if (process.argv[2] = 'my-tweets') {
     })
   }
   
-};
+}
 
 // twitterRequest();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,37 +66,38 @@ if (process.argv[2] = 'my-tweets') {
 ////////////////////////////////////////////////////////////////////
 //SPOTIFY REQUEST
 ///////////////////////////////////////////////////////////////////
-// spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(err, data) {
-//     if ( err ) {
-//         console.log('Error occurred: ' + err);
-//         return;
-//     }
-//     data.tracks.href
- 
-//     // Do something with 'data' 
+if (process.argv[2] === 'spotify-this-song' && process.argv[3] === '') {
 
-// });
+  spotifyRequest();
+
+  function spotifyRequest() {
+    // The song input
+    var songName = process.argv[3];
+
+    // spotify URL + string from array + the api key
+    var queryURL = 'https://api.spotify.com' + songName + '/v1/albums/{id}/tracks';
+    
+      // Creating an AJAX (asynchronous HTTP request) calls the spotify API for the song name.
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).done(function(response) {
+        console.log(JSON.stringify(tweets, null ,2));
+      
+      })
+  }
+
+
+}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// Giphy URL + string from array + the api key
-  // var queryURL = "https://api.spotify.com/v1/artists/{id}/top-tracks";
 
-// spotify developer
-// Client ID
-// var client_id = "e25f7a6dfece48839bff27e5dac13849";
+// // Client ID
+//   var client_id = "e25f7a6dfece48839bff27e5dac13849";
 
-
-// Client Secret
-// var client_secret = "fe74b2d270684b84a298f724fac8f68e";
-
-
-
-  // Creating an AJAX (asynchronous HTTP request) calls the spotify API for the song name.
-  // $.ajax({
-  //   url: queryURL,
-  //   method: "GET"
-  // }).done(function(response) {}
+//   // Client Secret
+//   var client_secret = "fe74b2d270684b84a298f724fac8f68e";
 
 
 
