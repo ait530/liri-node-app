@@ -1,4 +1,4 @@
-console.log('key.js is loaded');
+// console.log('key.js is loaded');
 
 // export -- an object which is shared between all instances of the current module and made accessible through require().
 exports.twitterKeys = {
