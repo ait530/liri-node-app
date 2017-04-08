@@ -21,12 +21,13 @@ console.log(nodeArgs);
 var twitter = require('twitter');
 // Loads Spotify module
 var spotify = require('spotify');
-// Loads Request module
+// Loads Request module, Here we incorporate the "request" npm package
 var request = require('request');
 
 
 // Global Scope Variables
-// var songName = process.argv[3];
+var songName = '';
+var movieName = process.argv[3];
 
 
 
@@ -60,25 +61,16 @@ if (process.argv[2] === 'my-tweets') {
         }
       }
     })
-    
   }
- 
 }
-
-// twitterRequest();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Need to figure out some way to provide "node liri.js my-tweets" command.
-// Shows last 20 tweets when they were created in terminal (want to output the text portion of the tweets output)
 
 
 
-
-//   // The song input
-//   var songName = process.argv[3];
-// ////////////////////////////////////////////////////////////////////
-// //SPOTIFY REQUEST
-// ///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+// SPOTIFY REQUEST
+/////////////////////////////////////////////////////////////////////////////
 // if (process.argv[2] === 'spotify-this-song' && process.argv[3] === songName) {
 
 //   spotifyRequest();
@@ -104,7 +96,6 @@ if (process.argv[2] === 'my-tweets') {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
 // // Client ID
 //   var client_id = "e25f7a6dfece48839bff27e5dac13849";
 
@@ -117,28 +108,53 @@ if (process.argv[2] === 'my-tweets') {
 ///////////////////////////////////////////////////////////////////
 // OMDB REQUEST
 ///////////////////////////////////////////////////////////////////
-// Basic Node application for requesting data from the OMDB website
-// Here we incorporate the "request" npm package
-// var request = require("request");
+// if the 2nd argument is 'my-tweets'...
+if (process.argv[2] === 'movie-this' && process.argv[3] === movieName) {
 
-// // We then run the request module on a URL with a JSON
-// request("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&r=json", function(error, response, body) {
+  
+  // Loop through all the words in the node argument
+  // And do a little for-loop magic to handle the inclusion of "+"s
+  for (var i = 2; i < nodeArgs.length; i++) {
 
-//   // If there were no errors and the response code was 200 (i.e. the request was successful)...
-//   if (!error && response.statusCode === 200) {
+    if (i > 2 && i < nodeArgs.length) {
 
-//     // Then we print out the imdbRating
-//     console.log("The movie's rating is: " + JSON.parse(body).imdbRating);
-//   }
-// });
+      movieName = movieName + "+" + nodeArgs[i];
+
+    }
+
+    else {
+
+      movieName += nodeArgs[i];
+
+    }
+  }
+
+  // Then run a request to the OMDB API with the movie specified
+  var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&r=json";
+
+  // This line is just to help us debug against the actual URL.
+  console.log(queryUrl);
+
+  request(queryUrl, function(error, response, body) {
+
+    // If the request is successful
+    if (!error && response.statusCode === 200) {
+
+      // Parse the body of the site and recover just the imdbRating
+      // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
+      console.log("Release Year: " + JSON.parse(body).Year);
+    }
+  })
+
+}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 
-////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 // READING .TEXTFILE
-////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 // fs is an NPM package for reading and writing files
 // var fs = require("fs");
 
@@ -166,9 +182,9 @@ if (process.argv[2] === 'my-tweets') {
 
 
 
-////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 // NOTES
-////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 // e.g.) commandline 
 // input: node liri.js my-tweets  
 // output: shows your last 20 tweets and when they were created at in your terminal/bash window.
