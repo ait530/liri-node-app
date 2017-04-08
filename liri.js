@@ -28,20 +28,32 @@ var request = require('request');
 /////////////////////////////////////////////////////////////////////////////
 // TWITTER REQUEST
 /////////////////////////////////////////////////////////////////////////////
-// New client, pulls from keys(exports).twitter keys object
-// Shorten to keys.twitterKeys since "keys" pulls from keys.js, and "twitterKeys" are in the keys.js file, thus, keys.twitterKeys to access Twitter API. 
-var client = new twitter(keys.twitterKeys);
- 
-// Grabs from my twitter profile "atrierweil".
-var params = {screen_name: 'atrierweil'};
-// Gets status, function that outputs error, tweets, and response.
-client.get('statuses/user_timeline', params, function(error, tweets, response) {
-  // If no error, 
-  if (!error) { 
-    // log tweets. 
-    console.log(tweets)
+// if the 2nd argument is 'my-tweets'...
+if (process.argv[2] = 'my-tweets') {
+  // evoke twitter request function
+  twitterRequest(); 
+  function twitterRequest() {
+
+    // New client, pulls from keys(exports).twitter keys object
+    // Shorten to keys.twitterKeys since "keys" pulls from keys.js, and "twitterKeys" are in the keys.js file, thus, keys.twitterKeys to access Twitter API. 
+    var client = new twitter(keys.twitterKeys);
+     
+    // Grabs from my twitter profile "atrierweil".
+    var params = {screen_name: 'atrierweil'};
+    // Gets status, function that outputs error, tweets, and response.
+    client.get('statuses/user_timeline', params, function(error, tweets, response) {
+      // If no error, 
+      if (!error) { 
+        // log tweets. 
+        console.log(JSON.stringify(tweets, null ,2));
+        
+      }
+    })
   }
-});
+  
+};
+
+// twitterRequest();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Need to figure out some way to provide "node liri.js my-tweets" command.
