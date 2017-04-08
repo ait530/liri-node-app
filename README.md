@@ -1,8 +1,14 @@
 # liri-node-app
-Homework 10, LIRI Bot: Language Interpretation and Recognition Interface
+<h1>LIRI Bot:</h1>
+Language 
+Interpretation
+Recognition
+Interface
+
 
 
 A command line app that takes in parameters and gives back data:
+
 
 
 
@@ -14,11 +20,13 @@ Twitter: displays my latest tweets.
 
 
 
+
 Spotify: displays song's artist(s), song name, preview link of the song, and album that the song is from. 
            * Artist(s)
            * The song's name
            * A preview link of the song from Spotify
            * The album that the song is from
+
 
 
 
@@ -33,6 +41,7 @@ OMDB:
            * Actors in the movie.
            * Rotten Tomatoes Rating.
            * Rotten Tomatoes URL.
+
 
 
 
