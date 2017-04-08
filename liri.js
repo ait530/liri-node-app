@@ -16,12 +16,17 @@ console.log(nodeArgs);
 // npm install spotify//////////
 // npm install request//////////
 //////////////////////////////// 
+
 // Loads Twitter module
 var twitter = require('twitter');
 // Loads Spotify module
 var spotify = require('spotify');
 // Loads Request module
 var request = require('request');
+
+
+// Global Scope Variables
+// var songName = process.argv[3];
 
 
 
@@ -33,7 +38,7 @@ if (process.argv[2] === 'my-tweets') {
   // evoke twitter request function
   twitterRequest(); 
   function twitterRequest() {
-
+    
     // New client, pulls from keys(exports).twitter keys object
     // Shorten to keys.twitterKeys since "keys" pulls from keys.js, and "twitterKeys" are in the keys.js file, thus, keys.twitterKeys to access Twitter API. 
     var client = new twitter(keys.twitterKeys);
@@ -43,14 +48,21 @@ if (process.argv[2] === 'my-tweets') {
     // Gets status, function that outputs error, tweets, and response.
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
       // If no error, 
-      if (!error) { 
-        // log tweets. 
-        console.log(JSON.stringify(tweets, null ,2));
+      if (!error) {  
+      
+
+        // Repeat for up to 20 tweets...
+        for (i = 0; i < 20; i++) {
+        // log tweets.
+        console.log(tweets);
         
+
+        }
       }
     })
+    
   }
-  
+ 
 }
 
 // twitterRequest();
@@ -62,33 +74,33 @@ if (process.argv[2] === 'my-tweets') {
 
 
 
+//   // The song input
+//   var songName = process.argv[3];
+// ////////////////////////////////////////////////////////////////////
+// //SPOTIFY REQUEST
+// ///////////////////////////////////////////////////////////////////
+// if (process.argv[2] === 'spotify-this-song' && process.argv[3] === songName) {
 
-////////////////////////////////////////////////////////////////////
-//SPOTIFY REQUEST
-///////////////////////////////////////////////////////////////////
-if (process.argv[2] === 'spotify-this-song' && process.argv[3] === '') {
+//   spotifyRequest();
 
-  spotifyRequest();
-
-  function spotifyRequest() {
-    // The song input
-    var songName = process.argv[3];
-
-    // spotify URL + string from array + the api key
-    var queryURL = 'https://api.spotify.com' + songName + '/v1/albums/{id}/tracks';
+//   function spotifyRequest() {
     
-      // Creating an AJAX (asynchronous HTTP request) calls the spotify API for the song name.
-      $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).done(function(response) {
-        console.log(JSON.stringify(tweets, null ,2));
+
+//     // spotify URL + string from array + the api key
+//     var queryURL = 'https://api.spotify.com' + songName + '/v1/albums/{id}/tracks';
+    
+//       // Creating an AJAX (asynchronous HTTP request) calls the spotify API for the song name.
+//       $.ajax({
+//         url: queryURL,
+//         method: "GET"
+//       }).done(function(response) {
+//         console.log(JSON.stringify(tweets, null ,2));
       
-      })
-  }
+//       })
+//   }
 
 
-}
+// }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

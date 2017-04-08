@@ -7,7 +7,7 @@
 
 
 
-Twitter: displays my latest tweets.
+<h3>Twitter:</h3> displays my latest tweets.
   Command: "node liri.js my-tweets" 
   Output: shows last 20 tweets in terminal
 
@@ -15,7 +15,7 @@ Twitter: displays my latest tweets.
 
 
 
-Spotify: displays song's artist(s), song name, preview link of the song, and album that the song is from. 
+<h3>Spotify:</h3> displays song's artist(s), song name, preview link of the song, and album that the song is from. 
 Command: "node liri.js spotify-this-song"
            * Artist(s)
            * The song's name
@@ -25,7 +25,7 @@ Command: "node liri.js spotify-this-song"
 
 
 
-OMDB:
+<h3>OMDB:</h3>
   Command: "node liri.js movie-this '*movie name here*'"
   Output:  * Title of the movie.
            * Year the movie came out.
@@ -40,7 +40,7 @@ OMDB:
 
 
 
-random.txt:
+<h3>random.txt:</h3>
   Command: "node liri.js do-what-it-says"
   Output: Runs spotify-this-song for text in random.txt
 
