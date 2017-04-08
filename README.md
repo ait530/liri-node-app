@@ -1,13 +1,13 @@
 # liri-node-app
 <h1>LIRI Bot:</h1>
-Language 
+<h2>Language 
 Interpretation
 Recognition
-Interface
+Interface</h2>
 
 
 
-A command line app that takes in parameters and gives back data:
+<h2>A command line app that takes in parameters and gives back data:</h2>
 
 
 
